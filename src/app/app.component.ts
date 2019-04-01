@@ -21,6 +21,11 @@ export class AppComponent {
       icon: 'list'
     },
     {
+      title: 'Options',
+      url: '/options',
+      icon: 'settings'
+    },
+    {
       title: 'Login',
       url: '/login',
       icon: 'log-in'
