@@ -11,10 +11,10 @@
 
 <ion-content>
     <ion-card *ngFor="let r of rss" >
-      <ion-img src="{{r.urlImage}}"></ion-img>
+      <ion-img src="{{r.urlImage}}" *ngIf="r.urlImage != null"></ion-img>
       <ion-card-header>
-        <ion-card-subtitle>{{r.description}}</ion-card-subtitle>
         <ion-card-title>{{r.title}}</ion-card-title>
+        <ion-card-subtitle >{{r.description}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         {{r.content}}
