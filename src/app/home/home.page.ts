@@ -13,9 +13,14 @@ import {Router, RouterLink} from '@angular/router';
 })
 export class HomePage {
     constructor(public rssService: RssService, public  channelService: ChannelService, public router: Router) {
-        this.rssService.getRss();
+        if (this.rssService.rss.length === 0) {
+            this.rssService.getRss();
+        }
     }
     open(url: string, id: number) {
         this.router.navigateByUrl('/rss?url=' + url + '&id=' + id);
+    }
+    closeSwipe(item) {
+        item.close();
     }
 }

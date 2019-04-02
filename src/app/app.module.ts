@@ -12,6 +12,7 @@ import {RssService} from './services/rssService';
 import {ChannelService} from './services/channelService';
 import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './services/userService';
+import {UrlService} from './services/urlService';
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,6 +29,7 @@ import {UserService} from './services/userService';
         RssService,
         ChannelService,
         UserService,
+        UrlService,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
     bootstrap: [AppComponent]
