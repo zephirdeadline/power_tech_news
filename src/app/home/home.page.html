@@ -10,14 +10,13 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let r of rss" >
+    <ion-card (click)="open(r.urlOrigin, r.id)" [ngClass]="r.isRead ? 'read': 'jj' " *ngFor="let r of rssService.rss" >
       <ion-img src="{{r.urlImage}}" *ngIf="r.urlImage != null"></ion-img>
       <ion-card-header>
         <ion-card-title>{{r.title}}</ion-card-title>
         <ion-card-subtitle >{{r.description}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        {{r.content}}
       </ion-card-content>
     </ion-card>
 </ion-content>

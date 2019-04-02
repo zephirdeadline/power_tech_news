@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {RssService} from './services/rssService';
 import {ChannelService} from './services/channelService';
 import {HttpClientModule} from '@angular/common/http';
+import {UserService} from './services/userService';
 
 @NgModule({
     declarations: [AppComponent],
@@ -26,6 +27,7 @@ import {HttpClientModule} from '@angular/common/http';
         SplashScreen,
         RssService,
         ChannelService,
+        UserService,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
     bootstrap: [AppComponent]

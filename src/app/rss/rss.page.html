@@ -1,0 +1,9 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>rss</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(urlOrigin)"></iframe>
+</ion-content>

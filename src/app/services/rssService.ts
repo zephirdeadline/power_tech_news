@@ -1,11 +1,30 @@
 import {Injectable} from '@angular/core';
 import {Rss} from '../models/rss';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {UserService} from './userService';
 
 @Injectable()
 export class RssService {
-    public constructor (public http: HttpClient) {}
+    rss: Rss[] = [];
+    public constructor (public http: HttpClient, public userService: UserService) {
+
+    }
     public getRss() {
-        return this.http.get('http://localhost:8000/api/naturalrss/');
+        return this.http.get('http://localhost:8000/api/naturalrss/', this.userService.getHeader()).subscribe((response: any[]) => {
+            response.forEach(resp => {
+                console.log(resp);
+                this.rss.push(new Rss(1,
+                    resp.id,
+                    resp.title,
+                    resp.description,
+                    resp.url_image,
+                    resp.url_origin));
+            });
+        });
+    }
+    public markAsRead(id: number) {
+        return this.http.get('http://localhost:8000/api/rss/' + id + '/read/', this.userService.getHeader()).subscribe(
+            res => { console.log(); }
+        );
     }
 }
