@@ -11,7 +11,7 @@ export class UserService {
     }
 
     login(username: '', password: '') {
-        return this.http.post('http://localhost:8000/auth/token/login/', {username: username, password: password}).subscribe(
+        return this.http.post('https://newsserver.w4pity.fr/auth/token/login/', {username: username, password: password}).subscribe(
             (res: any) => {
                 console.log(res);
                 this.user.token = res.auth_token;
@@ -21,7 +21,7 @@ export class UserService {
 
     createAccount(username: '', password: '') {
         console.log('createaccount ', username, password);
-        return this.http.post('http://localhost:8000/auth/users/',
+        return this.http.post('https://newsserver.w4pity.fr/auth/users/',
             {username: username, password: password}).subscribe(result => {
                 this.login(username, password);
         });

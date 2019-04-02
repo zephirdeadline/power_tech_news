@@ -1,5 +1,7 @@
 {
   "name": "power_tech_news",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

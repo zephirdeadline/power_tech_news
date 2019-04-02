@@ -10,7 +10,7 @@ export class RssService {
 
     }
     public getRss() {
-        return this.http.get('http://localhost:8000/api/naturalrss/', this.userService.getHeader()).subscribe((response: any[]) => {
+        return this.http.get('https://newsserver.w4pity.fr/api/naturalrss/', this.userService.getHeader()).subscribe((response: any[]) => {
             response.forEach(resp => {
                 console.log(resp);
                 this.rss.push(new Rss(1,
@@ -23,7 +23,7 @@ export class RssService {
         });
     }
     public markAsRead(id: number) {
-        return this.http.get('http://localhost:8000/api/rss/' + id + '/read/', this.userService.getHeader()).subscribe(
+        return this.http.get('https://newsserver.w4pity.fr/api/rss/' + id + '/read/', this.userService.getHeader()).subscribe(
             res => { console.log(); }
         );
     }
