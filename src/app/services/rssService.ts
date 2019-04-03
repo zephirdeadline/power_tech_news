@@ -12,17 +12,26 @@ export class RssService {
                         public urlService: UrlService) {
 
     }
+    public loadRss() {
+        return this.http.get(this.urlService.getUrl('homeFeed'), this.userService.getHeader());
+    }
+    public setRssFromList(list) {
+        this.rss = [];
+        list.forEach(resp => {
+            this.rss.push(new Rss(1,
+                resp.id,
+                resp.title,
+                resp.description,
+                resp.url_image,
+                resp.url_origin,
+                false,
+                resp.date));
+        });
+        console.log(this.rss);
+    }
     public getRss() {
-        return this.http.get(this.urlService.getUrl('homeFeed'), this.userService.getHeader()).subscribe((response: any[]) => {
-            response.forEach(resp => {
-                console.log(resp);
-                this.rss.push(new Rss(1,
-                    resp.id,
-                    resp.title,
-                    resp.description,
-                    resp.url_image,
-                    resp.url_origin));
-            });
+        this.loadRss().subscribe((response: any[]) => {
+            this.setRssFromList(response);
         });
     }
     public markAsRead(id: number) {
@@ -33,5 +42,8 @@ export class RssService {
         return this.http.get(this.urlService.getUrl('markAsRead', id), this.userService.getHeader()).subscribe(
             res => { console.log(); }
         );
+    }
+    public fetch(url: string) {
+        return this.http.get(this.urlService.getUrl('fetch', url), this.userService.getHeader());
     }
 }

@@ -11,6 +11,7 @@ export class UrlService {
         this.urls.push({ 'name': 'login', url: () => this.baseUrl + 'auth/token/login/'});
         this.urls.push({ 'name': 'homeFeed', url: () => this.baseUrl + 'api/naturalrss/'});
         this.urls.push({ 'name': 'markAsRead', url: (id) => this.markAsRead(id)});
+        this.urls.push({ 'name': 'fetch', url: (url) => this.baseUrl + 'api/fetch/?url=' + url });
     }
     private markAsRead(id: number) {
         return this.baseUrl + 'api/rss/' + id + '/read/';

@@ -5,17 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { OptionsPage } from './options.page';
+import { AddrssPage } from './addrss.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: OptionsPage
-  },
-  {
-    path: 'addrss',
-    loadChildren: './addrss/addrss.module#AddrssPageModule'
-  },
+    component: AddrssPage
+  }
 ];
 
 @NgModule({
@@ -25,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [OptionsPage]
+  declarations: [AddrssPage]
 })
-export class OptionsPageModule {}
+export class AddrssPageModule {}

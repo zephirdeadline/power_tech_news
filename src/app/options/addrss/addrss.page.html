@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>addrss</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding="true">
+  <ion-list>
+
+    <ion-item>
+      <ion-label color="primary" >Url: </ion-label>
+      <ion-input [(ngModel)]="url"></ion-input><ion-button (click)="fetch()">Fetch</ion-button>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

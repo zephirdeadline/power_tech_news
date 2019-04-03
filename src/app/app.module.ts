@@ -13,6 +13,7 @@ import {ChannelService} from './services/channelService';
 import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './services/userService';
 import {UrlService} from './services/urlService';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
     declarations: [AppComponent],
@@ -21,6 +22,7 @@ import {UrlService} from './services/urlService';
         BrowserModule,
         HttpClientModule,
         IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
         AppRoutingModule
     ],
     providers: [

@@ -3,13 +3,18 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../models/user';
 import {Router} from '@angular/router';
 import {UrlService} from './urlService';
+import {RssService} from './rssService';
+import {Events} from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class UserService {
     user: User = null;
-    public constructor (public http: HttpClient,
-                        public router: Router,
-                        public urlService: UrlService) {
+    public constructor (private http: HttpClient,
+                        private router: Router,
+                        private urlService: UrlService,
+                        public events: Events,
+                        public storage: Storage) {
         this.user = new User();
     }
 
@@ -18,6 +23,8 @@ export class UserService {
             (res: any) => {
                 console.log(res);
                 this.user.token = res.auth_token;
+                this.storage.set('token', res.auth_token);
+                this.events.publish('user:login');
                 this.router.navigateByUrl('/home');
         });
     }
