@@ -3,13 +3,15 @@ import {Rss} from '../models/rss';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UserService} from './userService';
 import {UrlService} from './urlService';
+import {Events} from '@ionic/angular';
 
 @Injectable()
 export class RssService {
     rss: Rss[] = [];
     public constructor (public http: HttpClient,
                         public userService: UserService,
-                        public urlService: UrlService) {
+                        public urlService: UrlService,
+                        public events: Events) {
 
     }
     public loadRss() {
@@ -27,11 +29,11 @@ export class RssService {
                 false,
                 resp.date));
         });
-        console.log(this.rss);
     }
     public getRss() {
         this.loadRss().subscribe((response: any[]) => {
             this.setRssFromList(response);
+            this.events.publish('rss:loaded');
         });
     }
     public markAsRead(id: number) {

@@ -6,8 +6,17 @@
 
 <ion-content>
   <ion-list>
+
       <ion-item>
         <ion-button routerLink="/options/addrss" class="add-rss"  >Add your own rss</ion-button>
       </ion-item>
+      <ion-item-sliding #item *ngFor="let channel of channelService.channels">
+          <ion-item >
+              {{channel.url}}
+          </ion-item>
+          <ion-item-options side="end">
+              <button ion-button class="delete" (click)="delete(channel.id)">Delete from my rss</button>
+          </ion-item-options>
+      </ion-item-sliding >
   </ion-list>
 </ion-content>

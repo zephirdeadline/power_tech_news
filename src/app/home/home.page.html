@@ -10,6 +10,9 @@
 </ion-header>
 
 <ion-content>
+  <div class="spinner" *ngIf="loading" >
+    <ion-spinner padding name="crescent"></ion-spinner><span>Loading amazing sources from universe</span>
+  </div>
   <ion-refresher slot="fixed" #refresher (ionRefresh)="doRefresh(refresher)">
     <ion-refresher-content
             pullingIcon="arrow-dropdown"
