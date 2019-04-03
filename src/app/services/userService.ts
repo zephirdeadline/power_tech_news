@@ -46,4 +46,8 @@ export class UserService {
     isAnonyme() {
         return this.user.token === null;
     }
+
+    logout() {
+        this.user.token = null;
+    }
 }

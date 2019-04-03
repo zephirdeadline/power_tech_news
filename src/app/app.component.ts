@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import {Events, Platform} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -9,22 +9,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  public appPages = [
+  public pageCommon = [
     {
       title: 'Home',
       url: '/home',
       icon: 'home'
     },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
-    {
-      title: 'Options',
-      url: '/options',
-      icon: 'settings'
-    },
+  ];
+  public pageNotConnected = [
     {
       title: 'Login',
       url: '/login',
@@ -36,12 +28,40 @@ export class AppComponent {
       icon: 'log-in'
     }
   ];
-
+  public pageConnected = [
+    // {
+    //   title: 'List',
+    //   url: '/list',
+    //   icon: 'list'
+    // },
+    {
+      title: 'Options',
+      url: '/options',
+      icon: 'settings'
+    },
+    {
+      title: 'Logout',
+      url: '/logout',
+      icon: 'log-out'
+    }
+  ];
+  public appPage: any[];
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public events: Events
   ) {
+    this.appPage = this.pageCommon.slice();
+    this.appPage.push(...this.pageConnected);
+    events.subscribe('user:login', () => {
+      this.appPage = this.pageCommon.slice();
+      this.appPage.push(...this.pageConnected);
+    });
+    events.subscribe('user:logout', () => {
+      this.appPage = this.pageCommon.slice();
+      this.appPage.push(...this.pageNotConnected);
+    });
     this.initializeApp();
   }
 

@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'signin', loadChildren: './signin/signin.module#SigninPageModule' },
   { path: 'options', loadChildren: './options/options.module#OptionsPageModule' },
-  { path: 'rss', loadChildren: './rss/rss.module#RssPageModule' }
+  { path: 'rss', loadChildren: './rss/rss.module#RssPageModule' },
+  { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' }
 ];
 
 @NgModule({
