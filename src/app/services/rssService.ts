@@ -37,7 +37,7 @@ export class RssService {
         });
     }
     public markAsRead(id: number) {
-        console.log(this.userService.isAnonyme());
+        console.log(id);
         if (this.userService.isAnonyme()) {
             return;
         }

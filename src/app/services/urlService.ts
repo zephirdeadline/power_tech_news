@@ -20,7 +20,7 @@ export class UrlService {
     }
     public getUrl(name: string, ...arg) {
         const u = this.urls.find(obj => obj.name === name).url(arg);
-        console.log(typeof u, u);
+        console.log(typeof u, u, arg);
         return u;
     }
 }

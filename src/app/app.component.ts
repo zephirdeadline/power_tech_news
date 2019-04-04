@@ -53,7 +53,7 @@ export class AppComponent {
     public events: Events
   ) {
     this.appPage = this.pageCommon.slice();
-    this.appPage.push(...this.pageConnected);
+    this.appPage.push(...this.pageNotConnected);
     events.subscribe('user:login', () => {
       this.appPage = this.pageCommon.slice();
       this.appPage.push(...this.pageConnected);
