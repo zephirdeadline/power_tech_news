@@ -12,7 +12,9 @@ export class RssService {
                         public userService: UserService,
                         public urlService: UrlService,
                         public events: Events) {
-
+        events.subscribe('user:login', () => {
+           this.getRss();
+        });
     }
     public loadRss() {
         return this.http.get(this.urlService.getUrl('homeFeed'), this.userService.getHeader());
@@ -31,6 +33,8 @@ export class RssService {
         });
     }
     public getRss() {
+        this.rss = [];
+        this.events.publish('rss:loading');
         this.loadRss().subscribe((response: any[]) => {
             this.setRssFromList(response);
             this.events.publish('rss:loaded');

@@ -38,6 +38,7 @@ export class UserService {
     }
 
     getHeader() {
+        console.log('token', this.user.token);
         return this.user.token ? {
             headers: new HttpHeaders().set('Authorization', 'token ' + this.user.token),
         } : {} ;
@@ -49,5 +50,7 @@ export class UserService {
 
     logout() {
         this.user.token = null;
+        this.storage.remove('token');
+        this.events.publish('user:logout');
     }
 }

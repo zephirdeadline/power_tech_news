@@ -7,6 +7,9 @@ import {forEach} from '@angular-devkit/schematics';
 import {Router, RouterLink} from '@angular/router';
 import {Events, LoadingController} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {UserService} from '../services/userService';
+
 
 @Component({
     selector: 'app-home',
@@ -18,7 +21,9 @@ export class HomePage implements OnInit {
     constructor(public rssService: RssService,
                 public router: Router,
                 public events: Events,
-                public storage: Storage) {
+                public storage: Storage,
+                private iab: InAppBrowser,
+                public userService: UserService) {
         if (this.rssService.rss.length === 0) {
             this.loading = true;
             this.storage.get('token').then((val) => {
@@ -34,11 +39,19 @@ export class HomePage implements OnInit {
         events.subscribe('rss:loaded', () => {
             this.loading = false;
         });
+        events.subscribe('rss:loading', () => {
+            this.loading = true;
+        });
     }
     ngOnInit() {
     }
     open(url: string, id: number) {
-        this.router.navigateByUrl('/rss?url=' + url + '&id=' + id);
+        if (this.userService.user.token !== null) {
+            this.rssService.markAsRead(id);
+        }
+        this.rssService.rss.forEach(rss => { if (rss.id === id) { rss.isRead = true; } });
+        this.iab.create(url, '_system', 'location=yes');
+        // this.router.navigateByUrl('/rss?url=' + url + '&id=' + id);
     }
     closeSwipe(item) {
         item.close();

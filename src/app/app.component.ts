@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {Events, Platform} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -20,11 +21,6 @@ export class AppComponent {
     {
       title: 'Login',
       url: '/login',
-      icon: 'log-in'
-    },
-    {
-      title: 'SignIn',
-      url: '/signin',
       icon: 'log-in'
     }
   ];
@@ -50,10 +46,9 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public events: Events
+    public events: Events,
+    public storage: Storage
   ) {
-    this.appPage = this.pageCommon.slice();
-    this.appPage.push(...this.pageNotConnected);
     events.subscribe('user:login', () => {
       this.appPage = this.pageCommon.slice();
       this.appPage.push(...this.pageConnected);
@@ -62,12 +57,20 @@ export class AppComponent {
       this.appPage = this.pageCommon.slice();
       this.appPage.push(...this.pageNotConnected);
     });
+    this.storage.get('token').then(token => {
+      if (token !== null) {
+        this.events.publish('user:login');
+      } else {
+        this.events.publish('user:logout');
+      }
+    });
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.styleBlackTranslucent();
       this.splashScreen.hide();
     });
   }

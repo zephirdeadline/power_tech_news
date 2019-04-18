@@ -8,7 +8,7 @@ import {ChannelService} from '../services/channelService';
 })
 export class OptionsPage implements OnInit {
 
-  constructor(private channelService: ChannelService) {
+  constructor(public channelService: ChannelService) {
     channelService.getChannels();
   }
 

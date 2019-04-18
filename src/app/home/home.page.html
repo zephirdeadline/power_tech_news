@@ -24,7 +24,8 @@
   <ion-list>
     <ion-item-sliding #item *ngFor="let r of rssService.rss" (ionSwipe)="rssService.markAsRead(r.id); r.isRead=true; closeSwipe(item)">
       <ion-item>
-        <ion-card (click)="open(r.urlOrigin, r.id)" [ngClass]="r.isRead ? 'read': 'jj' "  >
+<!--        <ion-card (click)="open(r.urlOrigin, r.id)" [ngClass]="r.isRead ? 'read': 'jj' "  >-->
+        <ion-card (click)="open(r.urlOrigin, r.id)" [ngClass]="r.isRead ? 'read': 'jj' ">
           <ion-img src="{{r.urlImage}}" *ngIf="r.urlImage != null"></ion-img>
           <ion-card-header>
             <ion-card-title>{{r.title}}</ion-card-title>

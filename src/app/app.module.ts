@@ -14,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './services/userService';
 import {UrlService} from './services/urlService';
 import {IonicStorageModule} from '@ionic/storage';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,6 +29,7 @@ import {IonicStorageModule} from '@ionic/storage';
     providers: [
         StatusBar,
         SplashScreen,
+        InAppBrowser,
         RssService,
         ChannelService,
         UserService,

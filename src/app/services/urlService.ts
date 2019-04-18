@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class UrlService {
-    // baseUrl = 'https://newsserver.w4pity.fr/';
-    baseUrl = 'http://localhost:8000/';
+    baseUrl = 'https://newsserver.w4pity.fr/';
+    // baseUrl = 'http://localhost:8000/';
     urls: any[] = [];
 
     public constructor() {
